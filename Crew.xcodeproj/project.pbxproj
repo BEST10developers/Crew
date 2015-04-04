@@ -11,6 +11,9 @@
 		2061672E1AD04B3700C90C4A /* Crew.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 206167221AD04B3700C90C4A /* Crew.framework */; };
 		206167351AD04B3700C90C4A /* CrewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206167341AD04B3700C90C4A /* CrewTests.swift */; };
 		20F2E01A1AD04B8600CE926A /* AutoLayout+DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F2E0191AD04B8600CE926A /* AutoLayout+DSL.swift */; };
+		20F2E02B1AD0520200CE926A /* Crew.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20F2E0201AD0520100CE926A /* Crew.framework */; };
+		20F2E0391AD0521400CE926A /* AutoLayout+DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F2E0191AD04B8600CE926A /* AutoLayout+DSL.swift */; };
+		20F2E03A1AD0532F00CE926A /* CrewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206167341AD04B3700C90C4A /* CrewTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -21,16 +24,25 @@
 			remoteGlobalIDString = 206167211AD04B3700C90C4A;
 			remoteInfo = Crew;
 		};
+		20F2E02C1AD0520200CE926A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 206167191AD04B3700C90C4A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 20F2E01F1AD0520100CE926A;
+			remoteInfo = "Crew-OSX";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		206167221AD04B3700C90C4A /* Crew.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Crew.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		206167261AD04B3700C90C4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		206167271AD04B3700C90C4A /* Crew.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Crew.h; sourceTree = "<group>"; };
-		2061672D1AD04B3700C90C4A /* CrewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2061672D1AD04B3700C90C4A /* Crew-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Crew-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		206167331AD04B3700C90C4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		206167341AD04B3700C90C4A /* CrewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewTests.swift; sourceTree = "<group>"; };
 		20F2E0191AD04B8600CE926A /* AutoLayout+DSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoLayout+DSL.swift"; sourceTree = "<group>"; };
+		20F2E0201AD0520100CE926A /* Crew.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Crew.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		20F2E02A1AD0520100CE926A /* Crew-OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Crew-OSXTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +58,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				2061672E1AD04B3700C90C4A /* Crew.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20F2E01C1AD0520100CE926A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20F2E0271AD0520100CE926A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20F2E02B1AD0520200CE926A /* Crew.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,7 +92,9 @@
 			isa = PBXGroup;
 			children = (
 				206167221AD04B3700C90C4A /* Crew.framework */,
-				2061672D1AD04B3700C90C4A /* CrewTests.xctest */,
+				2061672D1AD04B3700C90C4A /* Crew-iOSTests.xctest */,
+				20F2E0201AD0520100CE926A /* Crew.framework */,
+				20F2E02A1AD0520100CE926A /* Crew-OSXTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -116,12 +145,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		20F2E01D1AD0520100CE926A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		206167211AD04B3700C90C4A /* Crew */ = {
+		206167211AD04B3700C90C4A /* Crew-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 206167381AD04B3700C90C4A /* Build configuration list for PBXNativeTarget "Crew" */;
+			buildConfigurationList = 206167381AD04B3700C90C4A /* Build configuration list for PBXNativeTarget "Crew-iOS" */;
 			buildPhases = (
 				2061671D1AD04B3700C90C4A /* Sources */,
 				2061671E1AD04B3700C90C4A /* Frameworks */,
@@ -132,14 +168,14 @@
 			);
 			dependencies = (
 			);
-			name = Crew;
+			name = "Crew-iOS";
 			productName = Crew;
 			productReference = 206167221AD04B3700C90C4A /* Crew.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		2061672C1AD04B3700C90C4A /* CrewTests */ = {
+		2061672C1AD04B3700C90C4A /* Crew-iOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2061673B1AD04B3700C90C4A /* Build configuration list for PBXNativeTarget "CrewTests" */;
+			buildConfigurationList = 2061673B1AD04B3700C90C4A /* Build configuration list for PBXNativeTarget "Crew-iOSTests" */;
 			buildPhases = (
 				206167291AD04B3700C90C4A /* Sources */,
 				2061672A1AD04B3700C90C4A /* Frameworks */,
@@ -150,9 +186,45 @@
 			dependencies = (
 				206167301AD04B3700C90C4A /* PBXTargetDependency */,
 			);
-			name = CrewTests;
+			name = "Crew-iOSTests";
 			productName = CrewTests;
-			productReference = 2061672D1AD04B3700C90C4A /* CrewTests.xctest */;
+			productReference = 2061672D1AD04B3700C90C4A /* Crew-iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		20F2E01F1AD0520100CE926A /* Crew-OSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20F2E0331AD0520200CE926A /* Build configuration list for PBXNativeTarget "Crew-OSX" */;
+			buildPhases = (
+				20F2E01B1AD0520100CE926A /* Sources */,
+				20F2E01C1AD0520100CE926A /* Frameworks */,
+				20F2E01D1AD0520100CE926A /* Headers */,
+				20F2E01E1AD0520100CE926A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Crew-OSX";
+			productName = "Crew-OSX";
+			productReference = 20F2E0201AD0520100CE926A /* Crew.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		20F2E0291AD0520100CE926A /* Crew-OSXTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20F2E0361AD0520200CE926A /* Build configuration list for PBXNativeTarget "Crew-OSXTests" */;
+			buildPhases = (
+				20F2E0261AD0520100CE926A /* Sources */,
+				20F2E0271AD0520100CE926A /* Frameworks */,
+				20F2E0281AD0520100CE926A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				20F2E02D1AD0520200CE926A /* PBXTargetDependency */,
+			);
+			name = "Crew-OSXTests";
+			productName = "Crew-OSXTests";
+			productReference = 20F2E02A1AD0520100CE926A /* Crew-OSXTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -170,6 +242,12 @@
 					2061672C1AD04B3700C90C4A = {
 						CreatedOnToolsVersion = 6.2;
 					};
+					20F2E01F1AD0520100CE926A = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					20F2E0291AD0520100CE926A = {
+						CreatedOnToolsVersion = 6.2;
+					};
 				};
 			};
 			buildConfigurationList = 2061671C1AD04B3700C90C4A /* Build configuration list for PBXProject "Crew" */;
@@ -184,8 +262,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				206167211AD04B3700C90C4A /* Crew */,
-				2061672C1AD04B3700C90C4A /* CrewTests */,
+				206167211AD04B3700C90C4A /* Crew-iOS */,
+				2061672C1AD04B3700C90C4A /* Crew-iOSTests */,
+				20F2E01F1AD0520100CE926A /* Crew-OSX */,
+				20F2E0291AD0520100CE926A /* Crew-OSXTests */,
 			);
 		};
 /* End PBXProject section */
@@ -199,6 +279,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2061672B1AD04B3700C90C4A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20F2E01E1AD0520100CE926A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20F2E0281AD0520100CE926A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -224,13 +318,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		20F2E01B1AD0520100CE926A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20F2E0391AD0521400CE926A /* AutoLayout+DSL.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20F2E0261AD0520100CE926A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20F2E03A1AD0532F00CE926A /* CrewTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		206167301AD04B3700C90C4A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 206167211AD04B3700C90C4A /* Crew */;
+			target = 206167211AD04B3700C90C4A /* Crew-iOS */;
 			targetProxy = 2061672F1AD04B3700C90C4A /* PBXContainerItemProxy */;
+		};
+		20F2E02D1AD0520200CE926A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 20F2E01F1AD0520100CE926A /* Crew-OSX */;
+			targetProxy = 20F2E02C1AD0520200CE926A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -331,7 +446,7 @@
 				INFOPLIST_FILE = Crew/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Crew;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -348,7 +463,7 @@
 				INFOPLIST_FILE = Crew/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Crew;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -383,6 +498,86 @@
 			};
 			name = Release;
 		};
+		20F2E0341AD0520200CE926A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Crew/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = Crew;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		20F2E0351AD0520200CE926A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Crew/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = Crew;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		20F2E0371AD0520200CE926A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CrewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		20F2E0381AD0520200CE926A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CrewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -395,7 +590,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		206167381AD04B3700C90C4A /* Build configuration list for PBXNativeTarget "Crew" */ = {
+		206167381AD04B3700C90C4A /* Build configuration list for PBXNativeTarget "Crew-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				206167391AD04B3700C90C4A /* Debug */,
@@ -404,11 +599,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2061673B1AD04B3700C90C4A /* Build configuration list for PBXNativeTarget "CrewTests" */ = {
+		2061673B1AD04B3700C90C4A /* Build configuration list for PBXNativeTarget "Crew-iOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2061673C1AD04B3700C90C4A /* Debug */,
 				2061673D1AD04B3700C90C4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		20F2E0331AD0520200CE926A /* Build configuration list for PBXNativeTarget "Crew-OSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20F2E0341AD0520200CE926A /* Debug */,
+				20F2E0351AD0520200CE926A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		20F2E0361AD0520200CE926A /* Build configuration list for PBXNativeTarget "Crew-OSXTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20F2E0371AD0520200CE926A /* Debug */,
+				20F2E0381AD0520200CE926A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

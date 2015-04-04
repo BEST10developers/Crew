@@ -1,5 +1,11 @@
-import UIKit
+#if os(iOS)
+    import UIKit
+#elseif os(OSX)
+    import AppKit
+#endif
+
 import XCTest
+import Crew
 
 class CrewTests: XCTestCase {
     

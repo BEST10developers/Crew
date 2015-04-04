@@ -1,4 +1,3 @@
-
 #if os(iOS)
     import UIKit
     public typealias View = UIView

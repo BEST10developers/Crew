@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "206167211AD04B3700C90C4A"
+               BlueprintIdentifier = "20F2E01F1AD0520100CE926A"
                BuildableName = "Crew.framework"
-               BlueprintName = "Crew"
+               BlueprintName = "Crew-OSX"
                ReferencedContainer = "container:Crew.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2061672C1AD04B3700C90C4A"
-               BuildableName = "CrewTests.xctest"
-               BlueprintName = "CrewTests"
+               BlueprintIdentifier = "20F2E0291AD0520100CE926A"
+               BuildableName = "Crew-OSXTests.xctest"
+               BlueprintName = "Crew-OSXTests"
                ReferencedContainer = "container:Crew.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,9 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2061672C1AD04B3700C90C4A"
-               BuildableName = "CrewTests.xctest"
-               BlueprintName = "CrewTests"
+               BlueprintIdentifier = "20F2E0291AD0520100CE926A"
+               BuildableName = "Crew-OSXTests.xctest"
+               BlueprintName = "Crew-OSXTests"
                ReferencedContainer = "container:Crew.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -56,9 +56,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "206167211AD04B3700C90C4A"
+            BlueprintIdentifier = "20F2E01F1AD0520100CE926A"
             BuildableName = "Crew.framework"
-            BlueprintName = "Crew"
+            BlueprintName = "Crew-OSX"
             ReferencedContainer = "container:Crew.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -75,9 +75,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "206167211AD04B3700C90C4A"
+            BlueprintIdentifier = "20F2E01F1AD0520100CE926A"
             BuildableName = "Crew.framework"
-            BlueprintName = "Crew"
+            BlueprintName = "Crew-OSX"
             ReferencedContainer = "container:Crew.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -93,9 +93,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "206167211AD04B3700C90C4A"
+            BlueprintIdentifier = "20F2E01F1AD0520100CE926A"
             BuildableName = "Crew.framework"
-            BlueprintName = "Crew"
+            BlueprintName = "Crew-OSX"
             ReferencedContainer = "container:Crew.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
