@@ -102,8 +102,8 @@ public func <<(lhs: View, rhs: () -> [NSLayoutConstraint]) {
 
 // view extension
 
-extension View {
-    func add(block: () -> NSLayoutConstraint) {
+public extension View {
+    public func add(block: () -> NSLayoutConstraint) {
         addConstraint(block())
     }
 }
