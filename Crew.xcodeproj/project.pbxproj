@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		201229231AD0597F00FE89FA /* AutoLayoutDSLTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201229221AD0597F00FE89FA /* AutoLayoutDSLTest.swift */; };
+		201229241AD0597F00FE89FA /* AutoLayoutDSLTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201229221AD0597F00FE89FA /* AutoLayoutDSLTest.swift */; };
 		206167281AD04B3700C90C4A /* Crew.h in Headers */ = {isa = PBXBuildFile; fileRef = 206167271AD04B3700C90C4A /* Crew.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2061672E1AD04B3700C90C4A /* Crew.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 206167221AD04B3700C90C4A /* Crew.framework */; };
-		206167351AD04B3700C90C4A /* CrewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206167341AD04B3700C90C4A /* CrewTests.swift */; };
 		20F2E01A1AD04B8600CE926A /* AutoLayout+DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F2E0191AD04B8600CE926A /* AutoLayout+DSL.swift */; };
 		20F2E02B1AD0520200CE926A /* Crew.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20F2E0201AD0520100CE926A /* Crew.framework */; };
 		20F2E0391AD0521400CE926A /* AutoLayout+DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F2E0191AD04B8600CE926A /* AutoLayout+DSL.swift */; };
-		20F2E03A1AD0532F00CE926A /* CrewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206167341AD04B3700C90C4A /* CrewTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,12 +34,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		201229221AD0597F00FE89FA /* AutoLayoutDSLTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutDSLTest.swift; sourceTree = "<group>"; };
 		206167221AD04B3700C90C4A /* Crew.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Crew.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		206167261AD04B3700C90C4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		206167271AD04B3700C90C4A /* Crew.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Crew.h; sourceTree = "<group>"; };
 		2061672D1AD04B3700C90C4A /* Crew-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Crew-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		206167331AD04B3700C90C4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		206167341AD04B3700C90C4A /* CrewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewTests.swift; sourceTree = "<group>"; };
 		20F2E0191AD04B8600CE926A /* AutoLayout+DSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoLayout+DSL.swift"; sourceTree = "<group>"; };
 		20F2E0201AD0520100CE926A /* Crew.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Crew.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		20F2E02A1AD0520100CE926A /* Crew-OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Crew-OSXTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,7 +120,7 @@
 		206167311AD04B3700C90C4A /* CrewTests */ = {
 			isa = PBXGroup;
 			children = (
-				206167341AD04B3700C90C4A /* CrewTests.swift */,
+				201229221AD0597F00FE89FA /* AutoLayoutDSLTest.swift */,
 				206167321AD04B3700C90C4A /* Supporting Files */,
 			);
 			path = CrewTests;
@@ -314,7 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				206167351AD04B3700C90C4A /* CrewTests.swift in Sources */,
+				201229231AD0597F00FE89FA /* AutoLayoutDSLTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,7 +330,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20F2E03A1AD0532F00CE926A /* CrewTests.swift in Sources */,
+				201229241AD0597F00FE89FA /* AutoLayoutDSLTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
