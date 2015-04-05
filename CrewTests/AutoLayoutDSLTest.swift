@@ -24,11 +24,6 @@ class AutoLayoutDSLTest: XCTestCase {
         let view1 = View(frame: CGRect.zeroRect)
         let view2 = View(frame: CGRect.zeroRect)
 
-        let zz =             (
-            view1 ~ .Width == view2 ~ .Width * 2 + 10,
-            NSLayoutConstraint(item: view1, attribute: .Top, relatedBy: .Equal, toItem: view2, attribute: .Top, multiplier: 2, constant: 10)
-        )
-        
         let pairs: [(() -> NSLayoutConstraint, NSLayoutConstraint)] = [
             (
                 view1 ~ .Top == view2 ~ .Top,
