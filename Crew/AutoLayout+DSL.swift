@@ -9,9 +9,8 @@
 #endif
 
 
-infix operator ~ { associativity left precedence 160 }
+infix operator ~ { associativity none precedence 160 }
 infix operator ! { associativity left precedence 100 }
-infix operator << { associativity right precedence 90 }
 
 public typealias AutoLayoutLeftItem = (item: AnyObject, attribute: NSLayoutAttribute)
 public typealias AutoLayoutRightItem = (item: AnyObject, attribute: NSLayoutAttribute, multiplier: CGFloat, constant: CGFloat)
@@ -80,6 +79,20 @@ public func ==(lhs: AutoLayoutLeftItem, rhs: CGFloat) -> () -> NSLayoutConstrain
     }
 }
 
+public func <=(lhs: AutoLayoutLeftItem, rhs: CGFloat) -> () -> NSLayoutConstraint {
+    return {
+        NSLayoutConstraint(item: lhs.item, attribute: lhs.attribute, relatedBy: .LessThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: rhs)
+    }
+}
+
+public func >=(lhs: AutoLayoutLeftItem, rhs: CGFloat) -> () -> NSLayoutConstraint {
+    return {
+        NSLayoutConstraint(item: lhs.item, attribute: lhs.attribute, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: rhs)
+    }
+}
+
+
+
 // set priority
 
 public func !(lhs: () -> NSLayoutConstraint, priority: LayoutPriority) -> () -> NSLayoutConstraint {
@@ -92,19 +105,10 @@ public func !(lhs: () -> NSLayoutConstraint, priority: LayoutPriority) -> () -> 
 
 // add constrains
 
-public func <<(lhs: View, rhs: () -> NSLayoutConstraint) {
+public func <<=(lhs: View, rhs: () -> NSLayoutConstraint) {
     lhs.addConstraint(rhs())
 }
 
-public func <<(lhs: View, rhs: () -> [NSLayoutConstraint]) {
+public func <<=(lhs: View, rhs: () -> [NSLayoutConstraint]) {
     lhs.addConstraints(rhs())
 }
-
-// view extension
-
-public extension View {
-    public func add(block: () -> NSLayoutConstraint) {
-        addConstraint(block())
-    }
-}
-
