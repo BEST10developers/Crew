@@ -85,8 +85,13 @@ class AutoLayoutDSLTest: XCTestCase {
         let view2 = View(frame: CGRect.zeroRect)
         
         view1 <<= view1 ~ .Width == view2 ~ .Width * 2
-        
+
+#if os(iOS)
         expect(view1.constraints().count) == 1
+#elseif os(OSX)
+        expect(view1.constraints.count) == 1
+#endif
+
     }
 }
 
