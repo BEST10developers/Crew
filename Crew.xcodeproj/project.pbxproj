@@ -11,6 +11,8 @@
 		201229241AD0597F00FE89FA /* AutoLayoutDSLTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201229221AD0597F00FE89FA /* AutoLayoutDSLTest.swift */; };
 		206167281AD04B3700C90C4A /* Crew.h in Headers */ = {isa = PBXBuildFile; fileRef = 206167271AD04B3700C90C4A /* Crew.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2061672E1AD04B3700C90C4A /* Crew.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 206167221AD04B3700C90C4A /* Crew.framework */; };
+		206FDED91AD6A30900467334 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FDED81AD6A30900467334 /* Functions.swift */; };
+		206FDEDA1AD6A30900467334 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FDED81AD6A30900467334 /* Functions.swift */; };
 		20A82A681AD0DD4E0018CF03 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20A82A661AD0DD4E0018CF03 /* Nimble.framework */; };
 		20A82A691AD0DD4E0018CF03 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20A82A671AD0DD4E0018CF03 /* Quick.framework */; };
 		20A82A6B1AD0DDB00018CF03 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 20A82A661AD0DD4E0018CF03 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -77,6 +79,7 @@
 		206167271AD04B3700C90C4A /* Crew.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Crew.h; sourceTree = "<group>"; };
 		2061672D1AD04B3700C90C4A /* Crew-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Crew-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		206167331AD04B3700C90C4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		206FDED81AD6A30900467334 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		20A82A661AD0DD4E0018CF03 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		20A82A671AD0DD4E0018CF03 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		20A82A6F1AD0DED00018CF03 /* Matcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matcher.swift; sourceTree = "<group>"; };
@@ -199,6 +202,7 @@
 			children = (
 				20A82A6F1AD0DED00018CF03 /* Matcher.swift */,
 				20A82A721AD0E1030018CF03 /* NSLayoutConstraint+Extensions.swift */,
+				206FDED81AD6A30900467334 /* Functions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -388,6 +392,7 @@
 				20A82A701AD0DED00018CF03 /* Matcher.swift in Sources */,
 				20A82A731AD0E1030018CF03 /* NSLayoutConstraint+Extensions.swift in Sources */,
 				201229231AD0597F00FE89FA /* AutoLayoutDSLTest.swift in Sources */,
+				206FDED91AD6A30900467334 /* Functions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +411,7 @@
 				20A82A711AD0DED00018CF03 /* Matcher.swift in Sources */,
 				20A82A741AD0E1030018CF03 /* NSLayoutConstraint+Extensions.swift in Sources */,
 				201229241AD0597F00FE89FA /* AutoLayoutDSLTest.swift in Sources */,
+				206FDEDA1AD6A30900467334 /* Functions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

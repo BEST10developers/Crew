@@ -80,7 +80,104 @@ class AutoLayoutDSLTest: XCTestCase {
         }
     }
 
-    func testAdding() {
+    func testMargins() {
+        let view1 = View(frame: CGRect.zeroRect)
+        let view2 = View(frame: CGRect.zeroRect)
+
+        var pairs: [(() -> [NSLayoutConstraint], [NSLayoutConstraint])] = []
+
+        pairs.append(
+            view1 == view2 + EdgeInsets(top: 0, left: 0, bottom: 0, right: 0),
+            build(
+                view1 ~ .Top == view2 ~ .Top,
+                view1 ~ .Left == view2 ~ .Left,
+                view1 ~ .Bottom == view2 ~ .Bottom,
+                view1 ~ .Right == view2 ~ .Right
+            )
+        )
+
+        pairs.append(
+            view1 == view2 + EdgeInsets(top: 8, left: 9, bottom: 10, right: 11),
+            build(
+                view1 ~ .Top == view2 ~ .Top - 8,
+                view1 ~ .Left == view2 ~ .Left - 9,
+                view1 ~ .Bottom == view2 ~ .Bottom + 10,
+                view1 ~ .Right == view2 ~ .Right + 11
+            )
+        )
+
+        pairs.append(
+            view1 == view2 + EdgeInsets(top: 8, left: 9, bottom: 10, right: 11) ! 500,
+            build(
+                view1 ~ .Top == view2 ~ .Top - 8 ! 500,
+                view1 ~ .Left == view2 ~ .Left - 9 ! 500,
+                view1 ~ .Bottom == view2 ~ .Bottom + 10 ! 500,
+                view1 ~ .Right == view2 ~ .Right + 11 ! 500
+            )
+        )
+
+        pairs.append(
+            view1 >= view2 + EdgeInsets(top: 12, left: 13, bottom: 14, right: 15),
+            build(
+                view1 ~ .Top <= view2 ~ .Top - 12,
+                view1 ~ .Left <= view2 ~ .Left - 13,
+                view1 ~ .Bottom >= view2 ~ .Bottom + 14,
+                view1 ~ .Right >= view2 ~ .Right + 15
+            )
+        )
+
+        pairs.append(
+            view1 <= view2 + EdgeInsets(top: 21, left: 22, bottom: 23, right: 24),
+            build(
+                view1 ~ .Top >= view2 ~ .Top - 21,
+                view1 ~ .Left >= view2 ~ .Left - 22,
+                view1 ~ .Bottom <= view2 ~ .Bottom + 23,
+                view1 ~ .Right <= view2 ~ .Right + 24
+            )
+        )
+
+        pairs.append(
+            view1 == view2 + EdgeInsets(top: .NaN, left: 0, bottom: 0, right: 0),
+            build(
+                view1 ~ .Left == view2 ~ .Left,
+                view1 ~ .Bottom == view2 ~ .Bottom,
+                view1 ~ .Right == view2 ~ .Right
+            )
+        )
+
+        pairs.append(
+            view1 == view2 + EdgeInsets(top: 0, left: .NaN, bottom: 0, right: 0),
+            build(
+                view1 ~ .Top == view2 ~ .Top,
+                view1 ~ .Bottom == view2 ~ .Bottom,
+                view1 ~ .Right == view2 ~ .Right
+            )
+        )
+
+        pairs.append(
+            view1 == view2 + EdgeInsets(top: 5, left: 5, bottom: .NaN, right: 0),
+            build(
+                view1 ~ .Top == view2 ~ .Top - 5,
+                view1 ~ .Left == view2 ~ .Left - 5,
+                view1 ~ .Right == view2 ~ .Right
+            )
+        )
+
+        pairs.append(
+            view1 == view2 + EdgeInsets(top: 0, left: 5, bottom: 0, right: .NaN),
+            build(
+                view1 ~ .Top == view2 ~ .Top,
+                view1 ~ .Left == view2 ~ .Left - 5,
+                view1 ~ .Bottom == view2 ~ .Bottom
+            )
+        )
+
+        for pair in pairs {
+            expect(pair.0()) == pair.1
+        }
+    }
+
+    func testAddingSingle() {
         let view1 = View(frame: CGRect.zeroRect)
         let view2 = View(frame: CGRect.zeroRect)
         
@@ -92,6 +189,20 @@ class AutoLayoutDSLTest: XCTestCase {
         expect(view1.constraints.count) == 1
 #endif
 
+    }
+
+    func testAddingMultiple() {
+        let view1 = View(frame: CGRect.zeroRect)
+        let view2 = View(frame: CGRect.zeroRect)
+
+        view1 <<= view1 == view2 + EdgeInsets(top: 8, left: 9, bottom: 10, right: 11)
+
+#if os(iOS)
+        let cons = view1.constraints()
+#elseif os(OSX)
+        let cons = view1.constraints
+#endif
+        expect(cons.count) == 4
     }
 }
 

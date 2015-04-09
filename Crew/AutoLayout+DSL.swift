@@ -2,10 +2,12 @@
     import UIKit
     public typealias View = UIView
     public typealias LayoutPriority = UILayoutPriority
+    public typealias EdgeInsets = UIEdgeInsets
 #elseif os(OSX)
     import AppKit
     public typealias View = NSView
     public typealias LayoutPriority = NSLayoutPriority
+    public typealias EdgeInsets = NSEdgeInsets
 #endif
 
 
@@ -52,6 +54,10 @@ public func -(lhs: AutoLayoutRightItem, rhs: CGFloat) -> AutoLayoutRightItem {
     return lhs + -rhs
 }
 
+public func +(lhs: View, rhs: EdgeInsets) -> (View, EdgeInsets) {
+    return (lhs, rhs)
+}
+
 // build NSLayoutConstraint
 
 
@@ -73,6 +79,8 @@ public func >=(lhs: AutoLayoutLeftItem, rhs: AutoLayoutRightItem) -> () -> NSLay
     }
 }
 
+// Constant
+
 public func ==(lhs: AutoLayoutLeftItem, rhs: CGFloat) -> () -> NSLayoutConstraint {
     return {
         NSLayoutConstraint(item: lhs.item, attribute: lhs.attribute, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: rhs)
@@ -91,7 +99,50 @@ public func >=(lhs: AutoLayoutLeftItem, rhs: CGFloat) -> () -> NSLayoutConstrain
     }
 }
 
+// EdgeInsets
 
+public func ==(lhs: View, rhs: (View, EdgeInsets)) -> () -> [NSLayoutConstraint] {
+    return {
+        var cons: [() -> NSLayoutConstraint] = []
+        if rhs.1.top.isFinite {
+            cons.append(lhs ~ .Top == rhs.0 ~ .Top - rhs.1.top)
+        }
+        if rhs.1.left.isFinite {
+            cons.append(lhs ~ .Left == rhs.0 ~ .Left - rhs.1.left)
+        }
+        if rhs.1.bottom.isFinite {
+            cons.append(lhs ~ .Bottom == rhs.0 ~ .Bottom + rhs.1.bottom)
+        }
+        if rhs.1.right.isFinite {
+            cons.append(lhs ~ .Right == rhs.0 ~ .Right + rhs.1.right)
+        }
+        return cons.map { $0() }
+    }
+}
+
+public func >=(lhs: View, rhs: (View, EdgeInsets)) -> () -> [NSLayoutConstraint] {
+    return {
+        let cons: [() -> NSLayoutConstraint] = [
+            lhs ~ .Top <= rhs.0 ~ .Top - rhs.1.top,
+            lhs ~ .Left <= rhs.0 ~ .Left - rhs.1.left,
+            lhs ~ .Bottom >= rhs.0 ~ .Bottom + rhs.1.bottom,
+            lhs ~ .Right >= rhs.0 ~ .Right + rhs.1.right,
+        ]
+        return cons.map { $0() }
+    }
+}
+
+public func <=(lhs: View, rhs: (View, EdgeInsets)) -> () -> [NSLayoutConstraint] {
+    return {
+        let cons: [() -> NSLayoutConstraint] = [
+            lhs ~ .Top >= rhs.0 ~ .Top - rhs.1.top,
+            lhs ~ .Left >= rhs.0 ~ .Left - rhs.1.left,
+            lhs ~ .Bottom <= rhs.0 ~ .Bottom + rhs.1.bottom,
+            lhs ~ .Right <= rhs.0 ~ .Right + rhs.1.right,
+        ]
+        return cons.map { $0() }
+    }
+}
 
 // set priority
 
@@ -100,6 +151,15 @@ public func !(lhs: () -> NSLayoutConstraint, priority: LayoutPriority) -> () -> 
         let c = lhs()
         c.priority = priority
         return c
+    }
+}
+
+public func !(lhs: () -> [NSLayoutConstraint], priority: LayoutPriority) -> () -> [NSLayoutConstraint] {
+    return {
+        return lhs().map { c in
+            c.priority = priority
+            return c
+        }
     }
 }
 
