@@ -10,10 +10,6 @@ private func ==(c1: NSLayoutConstraint, c2: NSLayoutConstraint) -> Bool {
     let b = c1.firstItem === c2.firstItem && c1.firstAttribute == c2.firstAttribute &&
         c1.secondItem === c2.secondItem && c1.secondAttribute == c2.secondAttribute &&
         c1.relation == c2.relation && c1.multiplier == c2.multiplier && c1.constant == c2.constant && c1.priority == c2.priority
-    println("********")
-    println(c1)
-    println(c2)
-    println(b)
     return b
 }
 

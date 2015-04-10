@@ -13,6 +13,7 @@
 		2061672E1AD04B3700C90C4A /* Crew.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 206167221AD04B3700C90C4A /* Crew.framework */; };
 		206FDED91AD6A30900467334 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FDED81AD6A30900467334 /* Functions.swift */; };
 		206FDEDA1AD6A30900467334 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206FDED81AD6A30900467334 /* Functions.swift */; };
+		20A3DD191AD8058E00AB6740 /* Crew.h in Headers */ = {isa = PBXBuildFile; fileRef = 206167271AD04B3700C90C4A /* Crew.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		20A82A681AD0DD4E0018CF03 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20A82A661AD0DD4E0018CF03 /* Nimble.framework */; };
 		20A82A691AD0DD4E0018CF03 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20A82A671AD0DD4E0018CF03 /* Quick.framework */; };
 		20A82A6B1AD0DDB00018CF03 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 20A82A661AD0DD4E0018CF03 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -222,6 +223,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20A3DD191AD8058E00AB6740 /* Crew.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
