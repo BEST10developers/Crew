@@ -24,8 +24,8 @@ Fantastic DSL for Auto Layout in Swift.
     view <<= view3 ~ .Top == view2 ~ .Bottom + 10
 
     // same as:
-    // view.addConstraint(NSLayoutConstraint(item: view1, attribute: .Bottom, relatedBy: .Equal, toItem: view2, attribute: .Top, multiplier: 1, constant: 0))
-    // view.addConstraint(NSLayoutConstraint(item: view2, attribute: .Bottom, relatedBy: .Equal, toItem: view3, attribute: .Top, multiplier: 1, constant: 10))
+    // view.addConstraint(NSLayoutConstraint(item: view2, attribute: .Bottom, relatedBy: .Equal, toItem: view1, attribute: .Top, multiplier: 1, constant: 0))
+    // view.addConstraint(NSLayoutConstraint(item: view3, attribute: .Bottom, relatedBy: .Equal, toItem: view2, attribute: .Top, multiplier: 1, constant: 10))
     //
     // or:
     // view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[view1][view2]-(10)-[view3]", options: 0, metrics: nil, views: ["view1": view1, "view2": view2, "view3": view3]))
@@ -35,18 +35,18 @@ Fantastic DSL for Auto Layout in Swift.
     view <<= view == view1 + UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 
     // same as:
-    // view.addConstraint(NSLayoutConstraint(item: view1, attribute: .Top, relatedBy: .Equal, toItem: view, attribute: .Top, multiplier: 1, constant: 10))
-    // view.addConstraint(NSLayoutConstraint(item: view1, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 10))
-    // view.addConstraint(NSLayoutConstraint(item: view1, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: -10))
-    // view.addConstraint(NSLayoutConstraint(item: view1, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: -10))
+    // view.addConstraint(NSLayoutConstraint(item: view, attribute: .Top, relatedBy: .Equal, toItem: view1, attribute: .Top, multiplier: 1, constant: -10))
+    // view.addConstraint(NSLayoutConstraint(item: view, attribute: .Left, relatedBy: .Equal, toItem: view1, attribute: .Left, multiplier: 1, constant: -10))
+    // view.addConstraint(NSLayoutConstraint(item: view, attribute: .Bottom, relatedBy: .Equal, toItem: view1, attribute: .Bottom, multiplier: 1, constant: 10))
+    // view.addConstraint(NSLayoutConstraint(item: view, attribute: .Right, relatedBy: .Equal, toItem: view1, attribute: .Right, multiplier: 1, constant: 10))
 
 ### Inner view (only horizontal constraints)
 
     view <<= view == view1 + UIEdgeInsets(top: .NaN, left: 10, bottom: .NaN, right: 10)
 
     // same as:
-    // view.addConstraint(NSLayoutConstraint(item: view1, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 10))
-    // view.addConstraint(NSLayoutConstraint(item: view1, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: -10))
+    // view.addConstraint(NSLayoutConstraint(item: view, attribute: .Left, relatedBy: .Equal, toItem: view1, attribute: .Left, multiplier: 1, constant: -10))
+    // view.addConstraint(NSLayoutConstraint(item: view, attribute: .Right, relatedBy: .Equal, toItem: view1, attribute: .Right, multiplier: 1, constant: 10))
 
 ### Inner view (centering)
 
