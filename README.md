@@ -48,6 +48,15 @@ Fantastic DSL for Auto Layout in Swift.
     // view.addConstraint(NSLayoutConstraint(item: view1, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 10))
     // view.addConstraint(NSLayoutConstraint(item: view1, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: -10))
 
+### Inner view (centering)
+
+    view <<= view1 ~ .CenterX == view ~ .CenterX
+    view <<= view1 ~ .CenterY == view ~ .CenterY
+
+    // same as:
+    // view.addConstraint(NSLayoutConstraint(item: view1, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1, constant: 0))
+    // view.addConstraint(NSLayoutConstraint(item: view1, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: 0))
+
 ### Others
 
 See test code.  
