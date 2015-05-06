@@ -2,6 +2,13 @@
 
 Fantastic DSL for Auto Layout in Swift.
 
+## Installing
+
+### [Carthage](https://github.com/Carthage/Carthage)
+
+    github "kzms/Crew"
+
+
 ## Usage
 
 ### Square
@@ -77,6 +84,10 @@ Fantastic DSL for Auto Layout in Swift.
     // same as:
     // view.addConstraint(NSLayoutConstraint(item: view1, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1, constant: 0))
     // view.addConstraint(NSLayoutConstraint(item: view1, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: 0))
+
+### Priority
+    view1 ~ .Top == view2 ~ .Top ! 500
+    view == CGSize(width: 100, height: 200) ! 250
 
 ### Others
 
