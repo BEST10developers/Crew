@@ -53,3 +53,12 @@ func ==(lhs: Expectation<NSLayoutConstraint>, rhs: NSLayoutConstraint) {
 func ==(lhs: Expectation<[NSLayoutConstraint]>, rhs: [NSLayoutConstraint]) {
     lhs.to(equal(rhs))
 }
+
+func expect(file: String = __FILE__, line: UInt = __LINE__, expression: () -> NSLayoutConstraint, expectedValue: () -> NSLayoutConstraint) {
+    expect(expression(), file: file, line: line) == expectedValue()
+}
+
+func expect(file: String = __FILE__, line: UInt = __LINE__, expression: () -> [NSLayoutConstraint], expectedValue: () -> [NSLayoutConstraint]) {
+    expect(expression(), file: file, line: line) == expectedValue()
+}
+
