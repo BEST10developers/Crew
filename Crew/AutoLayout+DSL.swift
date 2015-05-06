@@ -17,7 +17,6 @@ infix operator ! { associativity left precedence 100 }
 public typealias AutoLayoutLeftItem = (item: AnyObject, attribute: NSLayoutAttribute)
 public typealias AutoLayoutRightItem = (item: AnyObject, attribute: NSLayoutAttribute, multiplier: CGFloat, constant: CGFloat)
 
-
 public func ~(item: View, rhs: NSLayoutAttribute) -> AutoLayoutLeftItem {
     return (item, rhs)
 }
@@ -113,6 +112,18 @@ public func >=(lhs: View, rhs: (View, EdgeInsets)) -> () -> [NSLayoutConstraint]
 
 public func <=(lhs: View, rhs: (View, EdgeInsets)) -> () -> [NSLayoutConstraint] {
     return build(lhs, rhs.0, rhs.1, (.GreaterThanOrEqual, .GreaterThanOrEqual, .LessThanOrEqual, .LessThanOrEqual))
+}
+
+// MARK: - Alignment
+
+public func ==(lhs: (view1: View, view2: View), attribute: NSLayoutAttribute) -> () -> NSLayoutConstraint {
+    return build((lhs.view1, attribute), (lhs.view2, attribute, 1, 0), .Equal)
+}
+
+public func ==(lhs: (view1: View, view2: View), attributes: [NSLayoutAttribute]) -> () -> [NSLayoutConstraint] {
+    return {
+        attributes.map { build((lhs.view1, $0), (lhs.view2, $0, 1, 0), .Equal)() }
+    }
 }
 
 // MARK: - Priority

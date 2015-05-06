@@ -20,7 +20,7 @@ class AutoLayoutDSLTest: XCTestCase {
         super.tearDown()
     }
 
-    func testDSL() {
+    func testBasicDSL() {
         let view1 = View(frame: CGRect.zeroRect)
         let view2 = View(frame: CGRect.zeroRect)
 
@@ -48,77 +48,77 @@ class AutoLayoutDSLTest: XCTestCase {
     }
 
     func testConstant() {
-        let view1 = View(frame: CGRect.zeroRect)
-        let view2 = View(frame: CGRect.zeroRect)
+        let view = View(frame: CGRect.zeroRect)
 
-        expect(view1 ~ .Width == 200) {
-            NSLayoutConstraint(item: view1, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 200)
+        expect(view ~ .Width == 200) {
+            NSLayoutConstraint(item: view, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 200)
         }
-        expect(view1 ~ .Width == 100 * 2 + 10) {
-            NSLayoutConstraint(item: view1, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 210)
+        expect(view ~ .Width == 100 * 2 + 10) {
+            NSLayoutConstraint(item: view, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 210)
         }
-        expect(view1 ~ .Width <= 200) {
-            NSLayoutConstraint(item: view1, attribute: .Width, relatedBy: .LessThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 200)
+        expect(view ~ .Width <= 200) {
+            NSLayoutConstraint(item: view, attribute: .Width, relatedBy: .LessThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 200)
         }
-        expect(view1 ~ .Height >= 200) {
-            NSLayoutConstraint(item: view1, attribute: .Height, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 200)
+        expect(view ~ .Height >= 200) {
+            NSLayoutConstraint(item: view, attribute: .Height, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 200)
         }
     }
 
     func testSize() {
-        let view1 = View(frame: CGRect.zeroRect)
-        let view2 = View(frame: CGRect.zeroRect)
+        let view = View(frame: CGRect.zeroRect)
 
         // ==
-        expect(view1 == CGSize(width: 100, height: 200)) {
+        expect(view == CGSize(width: 100, height: 200)) {
             flatten(
-                view1 ~ .Width == 100,
-                view1 ~ .Height == 200
+                view ~ .Width == 100,
+                view ~ .Height == 200
             )
         }
-        expect(view1 == CGSize(width: .NaN, height: 200.0)) {
+        expect(view == CGSize(width: .NaN, height: 200.0)) {
             flatten(
-                view1 ~ .Height == 200
+                view ~ .Height == 200
             )
         }
-        expect(view1 == CGSize(width: 100.0, height: .NaN)) {
+        expect(view == CGSize(width: 100.0, height: .NaN)) {
             flatten(
-                view1 ~ .Width == 100
+                view ~ .Width == 100
             )
         }
 
         // <=
-        expect(view1 <= CGSize(width: 100, height: 200)) {
+        expect(view <= CGSize(width: 100, height: 200)) {
             flatten(
-                view1 ~ .Width <= 100,
-                view1 ~ .Height <= 200
+                view ~ .Width <= 100,
+                view ~ .Height <= 200
             )
         }
-        expect(view1 <= CGSize(width: .NaN, height: 200.0)) {
+        expect(view <= CGSize(width: .NaN, height: 200.0)) {
             flatten(
-                view1 ~ .Height <= 200
+                view ~ .Height <= 200
             )
         }
-        expect(view1 <= CGSize(width: 100.0, height: .NaN)) {
+        expect(view <= CGSize(width: 100.0, height: .NaN)) {
             flatten(
-                view1 ~ .Width <= 100
+                view ~ .Width <= 100
             )
         }
 
-        expect(view1 >= CGSize(width: 100, height: 200)) {
+        // >=
+
+        expect(view >= CGSize(width: 100, height: 200)) {
             flatten(
-                view1 ~ .Width >= 100,
-                view1 ~ .Height >= 200
+                view ~ .Width >= 100,
+                view ~ .Height >= 200
             )
         }
-        expect(view1 >= CGSize(width: .NaN, height: 200.0)) {
+        expect(view >= CGSize(width: .NaN, height: 200.0)) {
             flatten(
-                view1 ~ .Height >= 200
+                view ~ .Height >= 200
             )
         }
-        expect(view1 >= CGSize(width: 100.0, height: .NaN)) {
+        expect(view >= CGSize(width: 100.0, height: .NaN)) {
             flatten(
-                view1 ~ .Width >= 100
+                view ~ .Width >= 100
             )
         }
     }
@@ -244,7 +244,6 @@ class AutoLayoutDSLTest: XCTestCase {
 
         expect(view1 <= view2 + EdgeInsets(top: .NaN, left: 0, bottom: 0, right: 0)) {
             flatten(
-                //view1 ~ .Top >= view2 ~ .Top,
                 view1 ~ .Left >= view2 ~ .Left,
                 view1 ~ .Bottom <= view2 ~ .Bottom,
                 view1 ~ .Right <= view2 ~ .Right
@@ -254,7 +253,6 @@ class AutoLayoutDSLTest: XCTestCase {
         expect(view1 <= view2 + EdgeInsets(top: 0, left: .NaN, bottom: 0, right: 0)) {
             flatten(
                 view1 ~ .Top >= view2 ~ .Top,
-                //view1 ~ .Left >= view2 ~ .Left,
                 view1 ~ .Bottom <= view2 ~ .Bottom,
                 view1 ~ .Right <= view2 ~ .Right
             )
@@ -264,7 +262,6 @@ class AutoLayoutDSLTest: XCTestCase {
             flatten(
                 view1 ~ .Top >= view2 ~ .Top,
                 view1 ~ .Left >= view2 ~ .Left,
-                //view1 ~ .Bottom <= view2 ~ .Bottom,
                 view1 ~ .Right <= view2 ~ .Right
             )
         }
@@ -274,7 +271,22 @@ class AutoLayoutDSLTest: XCTestCase {
                 view1 ~ .Top >= view2 ~ .Top,
                 view1 ~ .Left >= view2 ~ .Left,
                 view1 ~ .Bottom <= view2 ~ .Bottom
-                //view1 ~ .Right <= view2 ~ .Right
+            )
+        }
+    }
+
+    func testAlign() {
+        let view1 = View(frame: CGRect.zeroRect)
+        let view2 = View(frame: CGRect.zeroRect)
+
+        expect((view1, view2) == .Top) {
+            view1 ~ .Top == view2 ~ .Top
+        }
+
+        expect((view1, view2) == [.CenterX, .CenterY]) {
+            flatten(
+                view1 ~ .CenterX == view2 ~ .CenterX,
+                view1 ~ .CenterY == view2 ~ .CenterY
             )
         }
     }
@@ -283,15 +295,25 @@ class AutoLayoutDSLTest: XCTestCase {
         let view1 = View(frame: CGRect.zeroRect)
         let view2 = View(frame: CGRect.zeroRect)
 
-        expect(view1 ~ .Top == view2 ~ .Top ! 500) {
-            NSLayoutConstraint(item: view1, attribute: .Top, relatedBy: .Equal, toItem: view2, attribute: .Top, multiplier: 1, constant: 0).withPriority(500)
+        expect(view1 ~ .Top == view2 ~ .Top ! 500) { _ -> NSLayoutConstraint in
+            let c = NSLayoutConstraint(item: view1, attribute: .Top, relatedBy: .Equal, toItem: view2, attribute: .Top, multiplier: 1, constant: 0)
+            c.priority = 500
+            return c
         }
+
         expect(view1 == view2 + EdgeInsets(top: 8, left: 9, bottom: 10, right: 11) ! 500) {
             flatten(
                 view1 ~ .Top == view2 ~ .Top - 8 ! 500,
                 view1 ~ .Left == view2 ~ .Left - 9 ! 500,
                 view1 ~ .Bottom == view2 ~ .Bottom + 10 ! 500,
                 view1 ~ .Right == view2 ~ .Right + 11 ! 500
+            )
+        }
+
+        expect(view1 == CGSize(width: 100, height: 200) ! 250) {
+            flatten(
+                view1 ~ .Width == 100 ! 250,
+                view1 ~ .Height == 200 ! 250
             )
         }
     }
