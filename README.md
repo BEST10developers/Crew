@@ -18,6 +18,27 @@ Fantastic DSL for Auto Layout in Swift.
     // same as:
     // view.addConstraint(NSLayoutConstraint(item: view1, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 30))
 
+### With CGSize
+
+    view <<= view1 == CGSize(width: 100, height: 200)
+
+    // same as:
+    // view <<= view1 ~ .Width == 100
+    // view <<= view1 ~ .Height == 200
+
+### Alignment
+
+    view <<= (view1, view2) == .Top
+
+    // same as
+    // view <<= view1 ~ .Top == view2 ~ .Top
+
+    view <<= (view1, view2) == [.CenterX, .CenterY]
+
+    // same as
+    // view <<= view1 ~ .CenterX == view2 ~ .CenterX
+    // view <<= view1 ~ .CenterY == view2 ~ .CenterY
+
 ### Relation
 
     view <<= view2 ~ .Top == view1 ~ .Bottom

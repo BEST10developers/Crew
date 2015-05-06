@@ -20,8 +20,6 @@
 		20A3DD191AD8058E00AB6740 /* Crew.h in Headers */ = {isa = PBXBuildFile; fileRef = 206167271AD04B3700C90C4A /* Crew.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		20A82A701AD0DED00018CF03 /* Matcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A82A6F1AD0DED00018CF03 /* Matcher.swift */; };
 		20A82A711AD0DED00018CF03 /* Matcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A82A6F1AD0DED00018CF03 /* Matcher.swift */; };
-		20A82A731AD0E1030018CF03 /* NSLayoutConstraint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A82A721AD0E1030018CF03 /* NSLayoutConstraint+Extensions.swift */; };
-		20A82A741AD0E1030018CF03 /* NSLayoutConstraint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A82A721AD0E1030018CF03 /* NSLayoutConstraint+Extensions.swift */; };
 		20F2E01A1AD04B8600CE926A /* AutoLayout+DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F2E0191AD04B8600CE926A /* AutoLayout+DSL.swift */; };
 		20F2E02B1AD0520200CE926A /* Crew.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20F2E0201AD0520100CE926A /* Crew.framework */; };
 		20F2E0391AD0521400CE926A /* AutoLayout+DSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F2E0191AD04B8600CE926A /* AutoLayout+DSL.swift */; };
@@ -78,7 +76,6 @@
 		206167331AD04B3700C90C4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		206FDED81AD6A30900467334 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		20A82A6F1AD0DED00018CF03 /* Matcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matcher.swift; sourceTree = "<group>"; };
-		20A82A721AD0E1030018CF03 /* NSLayoutConstraint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Extensions.swift"; sourceTree = "<group>"; };
 		20F2E0191AD04B8600CE926A /* AutoLayout+DSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AutoLayout+DSL.swift"; sourceTree = "<group>"; };
 		20F2E0201AD0520100CE926A /* Crew.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Crew.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		20F2E02A1AD0520100CE926A /* Crew-OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Crew-OSXTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,7 +191,6 @@
 			isa = PBXGroup;
 			children = (
 				20A82A6F1AD0DED00018CF03 /* Matcher.swift */,
-				20A82A721AD0E1030018CF03 /* NSLayoutConstraint+Extensions.swift */,
 				206FDED81AD6A30900467334 /* Functions.swift */,
 			);
 			path = Helpers;
@@ -384,7 +380,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				20A82A701AD0DED00018CF03 /* Matcher.swift in Sources */,
-				20A82A731AD0E1030018CF03 /* NSLayoutConstraint+Extensions.swift in Sources */,
 				201229231AD0597F00FE89FA /* AutoLayoutDSLTest.swift in Sources */,
 				206FDED91AD6A30900467334 /* Functions.swift in Sources */,
 			);
@@ -403,7 +398,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				20A82A711AD0DED00018CF03 /* Matcher.swift in Sources */,
-				20A82A741AD0E1030018CF03 /* NSLayoutConstraint+Extensions.swift in Sources */,
 				201229241AD0597F00FE89FA /* AutoLayoutDSLTest.swift in Sources */,
 				206FDEDA1AD6A30900467334 /* Functions.swift in Sources */,
 			);
