@@ -122,24 +122,38 @@ public func ==(lhs: View, rhs: (View, EdgeInsets)) -> () -> [NSLayoutConstraint]
 
 public func >=(lhs: View, rhs: (View, EdgeInsets)) -> () -> [NSLayoutConstraint] {
     return {
-        let cons: [() -> NSLayoutConstraint] = [
-            lhs ~ .Top <= rhs.0 ~ .Top - rhs.1.top,
-            lhs ~ .Left <= rhs.0 ~ .Left - rhs.1.left,
-            lhs ~ .Bottom >= rhs.0 ~ .Bottom + rhs.1.bottom,
-            lhs ~ .Right >= rhs.0 ~ .Right + rhs.1.right,
-        ]
+        var cons: [() -> NSLayoutConstraint] = []
+        if rhs.1.top.isFinite {
+            cons.append(lhs ~ .Top <= rhs.0 ~ .Top - rhs.1.top)
+        }
+        if rhs.1.left.isFinite {
+            cons.append(lhs ~ .Left <= rhs.0 ~ .Left - rhs.1.left)
+        }
+        if rhs.1.bottom.isFinite {
+            cons.append(lhs ~ .Bottom >= rhs.0 ~ .Bottom + rhs.1.bottom)
+        }
+        if rhs.1.right.isFinite {
+            cons.append(lhs ~ .Right >= rhs.0 ~ .Right + rhs.1.right)
+        }
         return cons.map { $0() }
     }
 }
 
 public func <=(lhs: View, rhs: (View, EdgeInsets)) -> () -> [NSLayoutConstraint] {
     return {
-        let cons: [() -> NSLayoutConstraint] = [
-            lhs ~ .Top >= rhs.0 ~ .Top - rhs.1.top,
-            lhs ~ .Left >= rhs.0 ~ .Left - rhs.1.left,
-            lhs ~ .Bottom <= rhs.0 ~ .Bottom + rhs.1.bottom,
-            lhs ~ .Right <= rhs.0 ~ .Right + rhs.1.right,
-        ]
+        var cons: [() -> NSLayoutConstraint] = []
+        if rhs.1.top.isFinite {
+            cons.append(lhs ~ .Top >= rhs.0 ~ .Top - rhs.1.top)
+        }
+        if rhs.1.left.isFinite {
+            cons.append(lhs ~ .Left >= rhs.0 ~ .Left - rhs.1.left)
+        }
+        if rhs.1.bottom.isFinite {
+            cons.append(lhs ~ .Bottom <= rhs.0 ~ .Bottom + rhs.1.bottom)
+        }
+        if rhs.1.right.isFinite {
+            cons.append(lhs ~ .Right <= rhs.0 ~ .Right + rhs.1.right)
+        }
         return cons.map { $0() }
     }
 }

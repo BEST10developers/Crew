@@ -136,6 +136,8 @@ class AutoLayoutDSLTest: XCTestCase {
             )
         )
 
+        // == .NaN
+
         pairs.append(
             view1 == view2 + EdgeInsets(top: .NaN, left: 0, bottom: 0, right: 0),
             build(
@@ -155,20 +157,100 @@ class AutoLayoutDSLTest: XCTestCase {
         )
 
         pairs.append(
-            view1 == view2 + EdgeInsets(top: 5, left: 5, bottom: .NaN, right: 0),
+            view1 == view2 + EdgeInsets(top: 0, left: 0, bottom: .NaN, right: 0),
             build(
-                view1 ~ .Top == view2 ~ .Top - 5,
-                view1 ~ .Left == view2 ~ .Left - 5,
+                view1 ~ .Top == view2 ~ .Top,
+                view1 ~ .Left == view2 ~ .Left,
                 view1 ~ .Right == view2 ~ .Right
             )
         )
 
         pairs.append(
-            view1 == view2 + EdgeInsets(top: 0, left: 5, bottom: 0, right: .NaN),
+            view1 == view2 + EdgeInsets(top: 0, left: 0, bottom: 0, right: .NaN),
             build(
                 view1 ~ .Top == view2 ~ .Top,
-                view1 ~ .Left == view2 ~ .Left - 5,
+                view1 ~ .Left == view2 ~ .Left,
                 view1 ~ .Bottom == view2 ~ .Bottom
+            )
+        )
+
+        // >= .NaN
+
+        pairs.append(
+            view1 >= view2 + EdgeInsets(top: .NaN, left: 0, bottom: 0, right: 0),
+            build(
+                view1 ~ .Left <= view2 ~ .Left,
+                view1 ~ .Bottom >= view2 ~ .Bottom,
+                view1 ~ .Right >= view2 ~ .Right
+            )
+        )
+
+        pairs.append(
+            view1 >= view2 + EdgeInsets(top: 0, left: .NaN, bottom: 0, right: 0),
+            build(
+                view1 ~ .Top <= view2 ~ .Top,
+                view1 ~ .Bottom >= view2 ~ .Bottom,
+                view1 ~ .Right >= view2 ~ .Right
+            )
+        )
+
+        pairs.append(
+            view1 >= view2 + EdgeInsets(top: 0, left: 0, bottom: .NaN, right: 0),
+            build(
+                view1 ~ .Top <= view2 ~ .Top,
+                view1 ~ .Left <= view2 ~ .Left,
+                view1 ~ .Right >= view2 ~ .Right
+            )
+        )
+
+        pairs.append(
+            view1 >= view2 + EdgeInsets(top: 0, left: 0, bottom: 0, right: .NaN),
+            build(
+                view1 ~ .Top <= view2 ~ .Top,
+                view1 ~ .Left <= view2 ~ .Left,
+                view1 ~ .Bottom >= view2 ~ .Bottom
+            )
+        )
+
+        // <= .NaN
+
+        pairs.append(
+            view1 <= view2 + EdgeInsets(top: .NaN, left: 0, bottom: 0, right: 0),
+            build(
+                //view1 ~ .Top >= view2 ~ .Top,
+                view1 ~ .Left >= view2 ~ .Left,
+                view1 ~ .Bottom <= view2 ~ .Bottom,
+                view1 ~ .Right <= view2 ~ .Right
+            )
+        )
+
+        pairs.append(
+            view1 <= view2 + EdgeInsets(top: 0, left: .NaN, bottom: 0, right: 0),
+            build(
+                view1 ~ .Top >= view2 ~ .Top,
+                //view1 ~ .Left >= view2 ~ .Left,
+                view1 ~ .Bottom <= view2 ~ .Bottom,
+                view1 ~ .Right <= view2 ~ .Right
+            )
+        )
+
+        pairs.append(
+            view1 <= view2 + EdgeInsets(top: 0, left: 0, bottom: .NaN, right: 0),
+            build(
+                view1 ~ .Top >= view2 ~ .Top,
+                view1 ~ .Left >= view2 ~ .Left,
+                //view1 ~ .Bottom <= view2 ~ .Bottom,
+                view1 ~ .Right <= view2 ~ .Right
+            )
+        )
+
+        pairs.append(
+            view1 <= view2 + EdgeInsets(top: 0, left: 0, bottom: 0, right: .NaN),
+            build(
+                view1 ~ .Top >= view2 ~ .Top,
+                view1 ~ .Left >= view2 ~ .Left,
+                view1 ~ .Bottom <= view2 ~ .Bottom
+                //view1 ~ .Right <= view2 ~ .Right
             )
         )
 
