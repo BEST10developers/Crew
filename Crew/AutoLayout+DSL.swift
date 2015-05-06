@@ -60,102 +60,45 @@ public func +(lhs: View, rhs: EdgeInsets) -> (View, EdgeInsets) {
 
 // build NSLayoutConstraint
 
-
 public func ==(lhs: AutoLayoutLeftItem, rhs: AutoLayoutRightItem) -> () -> NSLayoutConstraint {
-    return {
-        NSLayoutConstraint(item: lhs.item, attribute: lhs.attribute, relatedBy: .Equal, toItem: rhs.item, attribute: rhs.attribute, multiplier: rhs.multiplier, constant: rhs.constant)
-    }
+    return build(lhs, rhs, .Equal)
 }
 
 public func <=(lhs: AutoLayoutLeftItem, rhs: AutoLayoutRightItem) -> () -> NSLayoutConstraint {
-    return {
-        NSLayoutConstraint(item: lhs.item, attribute: lhs.attribute, relatedBy: .LessThanOrEqual, toItem: rhs.item, attribute: rhs.attribute, multiplier: rhs.multiplier, constant: rhs.constant)
-    }
+    return build(lhs, rhs, .LessThanOrEqual)
 }
 
 public func >=(lhs: AutoLayoutLeftItem, rhs: AutoLayoutRightItem) -> () -> NSLayoutConstraint {
-    return {
-        NSLayoutConstraint(item: lhs.item, attribute: lhs.attribute, relatedBy: .GreaterThanOrEqual, toItem: rhs.item, attribute: rhs.attribute, multiplier: rhs.multiplier, constant: rhs.constant)
-    }
+    return build(lhs, rhs, .GreaterThanOrEqual)
 }
 
 // Constant
 
 public func ==(lhs: AutoLayoutLeftItem, rhs: CGFloat) -> () -> NSLayoutConstraint {
-    return {
-        NSLayoutConstraint(item: lhs.item, attribute: lhs.attribute, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: rhs)
-    }
+    return build(lhs, rhs, .Equal)
 }
 
 public func <=(lhs: AutoLayoutLeftItem, rhs: CGFloat) -> () -> NSLayoutConstraint {
-    return {
-        NSLayoutConstraint(item: lhs.item, attribute: lhs.attribute, relatedBy: .LessThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: rhs)
-    }
+    return build(lhs, rhs, .LessThanOrEqual)
 }
 
 public func >=(lhs: AutoLayoutLeftItem, rhs: CGFloat) -> () -> NSLayoutConstraint {
-    return {
-        NSLayoutConstraint(item: lhs.item, attribute: lhs.attribute, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: rhs)
-    }
+    return build(lhs, rhs, .GreaterThanOrEqual)
 }
 
 // EdgeInsets
 
+
 public func ==(lhs: View, rhs: (View, EdgeInsets)) -> () -> [NSLayoutConstraint] {
-    return {
-        var cons: [() -> NSLayoutConstraint] = []
-        if rhs.1.top.isFinite {
-            cons.append(lhs ~ .Top == rhs.0 ~ .Top - rhs.1.top)
-        }
-        if rhs.1.left.isFinite {
-            cons.append(lhs ~ .Left == rhs.0 ~ .Left - rhs.1.left)
-        }
-        if rhs.1.bottom.isFinite {
-            cons.append(lhs ~ .Bottom == rhs.0 ~ .Bottom + rhs.1.bottom)
-        }
-        if rhs.1.right.isFinite {
-            cons.append(lhs ~ .Right == rhs.0 ~ .Right + rhs.1.right)
-        }
-        return cons.map { $0() }
-    }
+    return build(lhs, rhs.0, rhs.1, (.Equal, .Equal, .Equal, .Equal))
 }
 
 public func >=(lhs: View, rhs: (View, EdgeInsets)) -> () -> [NSLayoutConstraint] {
-    return {
-        var cons: [() -> NSLayoutConstraint] = []
-        if rhs.1.top.isFinite {
-            cons.append(lhs ~ .Top <= rhs.0 ~ .Top - rhs.1.top)
-        }
-        if rhs.1.left.isFinite {
-            cons.append(lhs ~ .Left <= rhs.0 ~ .Left - rhs.1.left)
-        }
-        if rhs.1.bottom.isFinite {
-            cons.append(lhs ~ .Bottom >= rhs.0 ~ .Bottom + rhs.1.bottom)
-        }
-        if rhs.1.right.isFinite {
-            cons.append(lhs ~ .Right >= rhs.0 ~ .Right + rhs.1.right)
-        }
-        return cons.map { $0() }
-    }
+    return build(lhs, rhs.0, rhs.1, (.LessThanOrEqual, .LessThanOrEqual, .GreaterThanOrEqual, .GreaterThanOrEqual))
 }
 
 public func <=(lhs: View, rhs: (View, EdgeInsets)) -> () -> [NSLayoutConstraint] {
-    return {
-        var cons: [() -> NSLayoutConstraint] = []
-        if rhs.1.top.isFinite {
-            cons.append(lhs ~ .Top >= rhs.0 ~ .Top - rhs.1.top)
-        }
-        if rhs.1.left.isFinite {
-            cons.append(lhs ~ .Left >= rhs.0 ~ .Left - rhs.1.left)
-        }
-        if rhs.1.bottom.isFinite {
-            cons.append(lhs ~ .Bottom <= rhs.0 ~ .Bottom + rhs.1.bottom)
-        }
-        if rhs.1.right.isFinite {
-            cons.append(lhs ~ .Right <= rhs.0 ~ .Right + rhs.1.right)
-        }
-        return cons.map { $0() }
-    }
+    return build(lhs, rhs.0, rhs.1, (.GreaterThanOrEqual, .GreaterThanOrEqual, .LessThanOrEqual, .LessThanOrEqual))
 }
 
 // set priority
@@ -186,3 +129,38 @@ public func <<=(lhs: View, rhs: () -> NSLayoutConstraint) {
 public func <<=(lhs: View, rhs: () -> [NSLayoutConstraint]) {
     lhs.addConstraints(rhs())
 }
+
+// MARK: - private functions
+
+private func build(lhs: AutoLayoutLeftItem, rhs: AutoLayoutRightItem, relation: NSLayoutRelation) -> () -> NSLayoutConstraint {
+    return {
+        NSLayoutConstraint(item: lhs.item, attribute: lhs.attribute, relatedBy: relation, toItem: rhs.item, attribute: rhs.attribute, multiplier: rhs.multiplier, constant: rhs.constant)
+    }
+}
+
+private func build(lhs: AutoLayoutLeftItem, constant: CGFloat, relation: NSLayoutRelation) -> () -> NSLayoutConstraint {
+    return {
+        NSLayoutConstraint(item: lhs.item, attribute: lhs.attribute, relatedBy: relation, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: constant)
+    }
+}
+
+private func build(lhs: View, rhs: View, insets: EdgeInsets, relations: (top: NSLayoutRelation, left: NSLayoutRelation, bottom: NSLayoutRelation, right: NSLayoutRelation)) -> () -> [NSLayoutConstraint] {
+    return {
+        var cons: [NSLayoutConstraint] = []
+        if insets.top.isFinite {
+            cons.append(build(lhs ~ .Top, rhs ~ .Top - insets.top, relations.top)())
+        }
+        if insets.left.isFinite {
+            cons.append(build(lhs ~ .Left, rhs ~ .Left - insets.left, relations.left)())
+        }
+        if insets.bottom.isFinite {
+            cons.append(build(lhs ~ .Bottom, rhs ~ .Bottom + insets.bottom, relations.bottom)())
+        }
+        if insets.right.isFinite {
+            cons.append(build(lhs ~ .Right, rhs ~ .Right + insets.right, relations.right)())
+        }
+        return cons
+    }
+}
+
+
