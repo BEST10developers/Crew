@@ -45,6 +45,12 @@ class AutoLayoutDSLTest: XCTestCase {
         expect(view1 ~ .Width >= view2 ~ .Width * 2 + 20) {
             NSLayoutConstraint(item: view1, attribute: .Width, relatedBy: .GreaterThanOrEqual, toItem: view2, attribute: .Width, multiplier: 2, constant: 20)
         }
+    }
+
+    func testConstant() {
+        let view1 = View(frame: CGRect.zeroRect)
+        let view2 = View(frame: CGRect.zeroRect)
+
         expect(view1 ~ .Width == 200) {
             NSLayoutConstraint(item: view1, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 200)
         }
@@ -56,6 +62,64 @@ class AutoLayoutDSLTest: XCTestCase {
         }
         expect(view1 ~ .Height >= 200) {
             NSLayoutConstraint(item: view1, attribute: .Height, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 200)
+        }
+    }
+
+    func testSize() {
+        let view1 = View(frame: CGRect.zeroRect)
+        let view2 = View(frame: CGRect.zeroRect)
+
+        // ==
+        expect(view1 == CGSize(width: 100, height: 200)) {
+            flatten(
+                view1 ~ .Width == 100,
+                view1 ~ .Height == 200
+            )
+        }
+        expect(view1 == CGSize(width: .NaN, height: 200.0)) {
+            flatten(
+                view1 ~ .Height == 200
+            )
+        }
+        expect(view1 == CGSize(width: 100.0, height: .NaN)) {
+            flatten(
+                view1 ~ .Width == 100
+            )
+        }
+
+        // <=
+        expect(view1 <= CGSize(width: 100, height: 200)) {
+            flatten(
+                view1 ~ .Width <= 100,
+                view1 ~ .Height <= 200
+            )
+        }
+        expect(view1 <= CGSize(width: .NaN, height: 200.0)) {
+            flatten(
+                view1 ~ .Height <= 200
+            )
+        }
+        expect(view1 <= CGSize(width: 100.0, height: .NaN)) {
+            flatten(
+                view1 ~ .Width <= 100
+            )
+        }
+
+        expect(view1 >= CGSize(width: 100, height: 200)) {
+            flatten(
+                view1 ~ .Width >= 100,
+                view1 ~ .Height >= 200
+            )
+        }
+        expect(view1 >= CGSize(width: .NaN, height: 200.0)) {
+            flatten(
+                view1 ~ .Height >= 200
+            )
+        }
+        expect(view1 >= CGSize(width: 100.0, height: .NaN)) {
+            flatten(
+                view1 ~ .Width >= 100
+            )
         }
     }
 

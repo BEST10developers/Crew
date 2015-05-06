@@ -58,7 +58,7 @@ public func +(lhs: View, rhs: EdgeInsets) -> (View, EdgeInsets) {
     return (lhs, rhs)
 }
 
-// build NSLayoutConstraint
+// MARK: - Build expression
 
 public func ==(lhs: AutoLayoutLeftItem, rhs: AutoLayoutRightItem) -> () -> NSLayoutConstraint {
     return build(lhs, rhs, .Equal)
@@ -72,7 +72,7 @@ public func >=(lhs: AutoLayoutLeftItem, rhs: AutoLayoutRightItem) -> () -> NSLay
     return build(lhs, rhs, .GreaterThanOrEqual)
 }
 
-// Constant
+// MARK: - Constant
 
 public func ==(lhs: AutoLayoutLeftItem, rhs: CGFloat) -> () -> NSLayoutConstraint {
     return build(lhs, rhs, .Equal)
@@ -86,8 +86,22 @@ public func >=(lhs: AutoLayoutLeftItem, rhs: CGFloat) -> () -> NSLayoutConstrain
     return build(lhs, rhs, .GreaterThanOrEqual)
 }
 
-// EdgeInsets
+// MARK: - Size
 
+public func ==(lhs: View, rhs: CGSize) -> () -> [NSLayoutConstraint] {
+    return build(lhs, rhs, .Equal)
+}
+
+public func <=(lhs: View, rhs: CGSize) -> () -> [NSLayoutConstraint] {
+    return build(lhs, rhs, .LessThanOrEqual)
+}
+
+public func >=(lhs: View, rhs: CGSize) -> () -> [NSLayoutConstraint] {
+    return build(lhs, rhs, .GreaterThanOrEqual)
+}
+
+
+// MARK: - Insets
 
 public func ==(lhs: View, rhs: (View, EdgeInsets)) -> () -> [NSLayoutConstraint] {
     return build(lhs, rhs.0, rhs.1, (.Equal, .Equal, .Equal, .Equal))
@@ -101,7 +115,7 @@ public func <=(lhs: View, rhs: (View, EdgeInsets)) -> () -> [NSLayoutConstraint]
     return build(lhs, rhs.0, rhs.1, (.GreaterThanOrEqual, .GreaterThanOrEqual, .LessThanOrEqual, .LessThanOrEqual))
 }
 
-// set priority
+// MARK: - Priority
 
 public func !(lhs: () -> NSLayoutConstraint, priority: LayoutPriority) -> () -> NSLayoutConstraint {
     return {
@@ -120,7 +134,7 @@ public func !(lhs: () -> [NSLayoutConstraint], priority: LayoutPriority) -> () -
     }
 }
 
-// add constrains
+// MARK: - Activate
 
 public func <<=(lhs: View, rhs: () -> NSLayoutConstraint) {
     lhs.addConstraint(rhs())
@@ -141,6 +155,19 @@ private func build(lhs: AutoLayoutLeftItem, rhs: AutoLayoutRightItem, relation: 
 private func build(lhs: AutoLayoutLeftItem, constant: CGFloat, relation: NSLayoutRelation) -> () -> NSLayoutConstraint {
     return {
         NSLayoutConstraint(item: lhs.item, attribute: lhs.attribute, relatedBy: relation, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: constant)
+    }
+}
+
+private func build(lhs: View, size: CGSize, relation: NSLayoutRelation) -> () -> [NSLayoutConstraint] {
+    return {
+        var cons: [NSLayoutConstraint] = []
+        if size.width.isFinite {
+            cons.append(build(lhs ~ .Width, size.width, relation)())
+        }
+        if size.height.isFinite {
+            cons.append(build(lhs ~ .Height, size.height, relation)())
+        }
+        return cons
     }
 }
 
