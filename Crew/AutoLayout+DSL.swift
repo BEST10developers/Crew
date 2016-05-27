@@ -60,69 +60,69 @@ public func +(lhs: View, rhs: EdgeInsets) -> (View, EdgeInsets) {
 // MARK: - Build expression
 
 public func ==(lhs: AutoLayoutLeftItem, rhs: AutoLayoutRightItem) -> () -> NSLayoutConstraint {
-    return build(lhs, rhs, .Equal)
+    return build(lhs, rhs: rhs, relation: .Equal)
 }
 
 public func <=(lhs: AutoLayoutLeftItem, rhs: AutoLayoutRightItem) -> () -> NSLayoutConstraint {
-    return build(lhs, rhs, .LessThanOrEqual)
+    return build(lhs, rhs: rhs, relation: .LessThanOrEqual)
 }
 
 public func >=(lhs: AutoLayoutLeftItem, rhs: AutoLayoutRightItem) -> () -> NSLayoutConstraint {
-    return build(lhs, rhs, .GreaterThanOrEqual)
+    return build(lhs, rhs: rhs, relation: .GreaterThanOrEqual)
 }
 
 // MARK: - Constant
 
 public func ==(lhs: AutoLayoutLeftItem, rhs: CGFloat) -> () -> NSLayoutConstraint {
-    return build(lhs, rhs, .Equal)
+    return build(lhs, constant: rhs, relation: .Equal)
 }
 
 public func <=(lhs: AutoLayoutLeftItem, rhs: CGFloat) -> () -> NSLayoutConstraint {
-    return build(lhs, rhs, .LessThanOrEqual)
+    return build(lhs, constant: rhs, relation: .LessThanOrEqual)
 }
 
 public func >=(lhs: AutoLayoutLeftItem, rhs: CGFloat) -> () -> NSLayoutConstraint {
-    return build(lhs, rhs, .GreaterThanOrEqual)
+    return build(lhs, constant: rhs, relation: .GreaterThanOrEqual)
 }
 
 // MARK: - Size
 
 public func ==(lhs: View, rhs: CGSize) -> () -> [NSLayoutConstraint] {
-    return build(lhs, rhs, .Equal)
+    return build(lhs, size: rhs, relation: .Equal)
 }
 
 public func <=(lhs: View, rhs: CGSize) -> () -> [NSLayoutConstraint] {
-    return build(lhs, rhs, .LessThanOrEqual)
+    return build(lhs, size: rhs, relation: .LessThanOrEqual)
 }
 
 public func >=(lhs: View, rhs: CGSize) -> () -> [NSLayoutConstraint] {
-    return build(lhs, rhs, .GreaterThanOrEqual)
+    return build(lhs, size: rhs, relation: .GreaterThanOrEqual)
 }
 
 
 // MARK: - Insets
 
 public func ==(lhs: View, rhs: (View, EdgeInsets)) -> () -> [NSLayoutConstraint] {
-    return build(lhs, rhs.0, rhs.1, (.Equal, .Equal, .Equal, .Equal))
+    return build(lhs, rhs: rhs.0, insets: rhs.1, relations: (.Equal, .Equal, .Equal, .Equal))
 }
 
 public func >=(lhs: View, rhs: (View, EdgeInsets)) -> () -> [NSLayoutConstraint] {
-    return build(lhs, rhs.0, rhs.1, (.LessThanOrEqual, .LessThanOrEqual, .GreaterThanOrEqual, .GreaterThanOrEqual))
+    return build(lhs, rhs: rhs.0, insets: rhs.1, relations: (.LessThanOrEqual, .LessThanOrEqual, .GreaterThanOrEqual, .GreaterThanOrEqual))
 }
 
 public func <=(lhs: View, rhs: (View, EdgeInsets)) -> () -> [NSLayoutConstraint] {
-    return build(lhs, rhs.0, rhs.1, (.GreaterThanOrEqual, .GreaterThanOrEqual, .LessThanOrEqual, .LessThanOrEqual))
+    return build(lhs, rhs: rhs.0, insets: rhs.1, relations: (.GreaterThanOrEqual, .GreaterThanOrEqual, .LessThanOrEqual, .LessThanOrEqual))
 }
 
 // MARK: - Alignment
 
 public func ==(lhs: (view1: View, view2: View), attribute: NSLayoutAttribute) -> () -> NSLayoutConstraint {
-    return build((lhs.view1, attribute), (lhs.view2, attribute, 1, 0), .Equal)
+    return build((lhs.view1, attribute), rhs: (lhs.view2, attribute, 1, 0), relation: .Equal)
 }
 
 public func ==(lhs: (view1: View, view2: View), attributes: [NSLayoutAttribute]) -> () -> [NSLayoutConstraint] {
     return {
-        attributes.map { build((lhs.view1, $0), (lhs.view2, $0, 1, 0), .Equal)() }
+        attributes.map { build((lhs.view1, $0), rhs: (lhs.view2, $0, 1, 0), relation: .Equal)() }
     }
 }
 
@@ -173,10 +173,10 @@ private func build(lhs: View, size: CGSize, relation: NSLayoutRelation) -> () ->
     return {
         var cons: [NSLayoutConstraint] = []
         if size.width.isFinite {
-            cons.append(build(lhs ~ .Width, size.width, relation)())
+            cons.append(build(lhs ~ .Width, constant: size.width, relation: relation)())
         }
         if size.height.isFinite {
-            cons.append(build(lhs ~ .Height, size.height, relation)())
+            cons.append(build(lhs ~ .Height, constant: size.height, relation: relation)())
         }
         return cons
     }
@@ -186,19 +186,17 @@ private func build(lhs: View, rhs: View, insets: EdgeInsets, relations: (top: NS
     return {
         var cons: [NSLayoutConstraint] = []
         if insets.top.isFinite {
-            cons.append(build(lhs ~ .Top, rhs ~ .Top - insets.top, relations.top)())
+            cons.append(build(lhs ~ .Top, rhs: rhs ~ .Top - insets.top, relation: relations.top)())
         }
         if insets.left.isFinite {
-            cons.append(build(lhs ~ .Left, rhs ~ .Left - insets.left, relations.left)())
+            cons.append(build(lhs ~ .Left, rhs: rhs ~ .Left - insets.left, relation: relations.left)())
         }
         if insets.bottom.isFinite {
-            cons.append(build(lhs ~ .Bottom, rhs ~ .Bottom + insets.bottom, relations.bottom)())
+            cons.append(build(lhs ~ .Bottom, rhs: rhs ~ .Bottom + insets.bottom, relation: relations.bottom)())
         }
         if insets.right.isFinite {
-            cons.append(build(lhs ~ .Right, rhs ~ .Right + insets.right, relations.right)())
+            cons.append(build(lhs ~ .Right, rhs: rhs ~ .Right + insets.right, relation: relations.right)())
         }
         return cons
     }
 }
-
-
