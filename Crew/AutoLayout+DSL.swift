@@ -155,6 +155,22 @@ public func <<=(lhs: View, rhs: () -> [NSLayoutConstraint]) {
     lhs.addConstraints(rhs())
 }
 
+public func activate(constraint: () -> NSLayoutConstraint) {
+    constraint().active = true
+}
+
+public func activate(constraints: () -> [NSLayoutConstraint]) {
+    NSLayoutConstraint.activateConstraints(constraints())
+}
+
+public func deactivate(constraint: () -> NSLayoutConstraint) {
+    constraint().active = false
+}
+
+public func deactivate(constraints: () -> [NSLayoutConstraint]) {
+    NSLayoutConstraint.deactivateConstraints(constraints())
+}
+
 // MARK: - private functions
 
 private func build(lhs: AutoLayoutLeftItem, rhs: AutoLayoutRightItem, relation: NSLayoutRelation) -> () -> NSLayoutConstraint {
