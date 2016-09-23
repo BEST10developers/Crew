@@ -10,9 +10,16 @@
     public typealias EdgeInsets = NSEdgeInsets
 #endif
 
-
-infix operator ~ { associativity none precedence 160 }
-infix operator ! { associativity left precedence 100 }
+precedencegroup AutoLayoutPriorityPrecedence {
+    associativity: none
+    higherThan: AdditionPrecedence
+}
+precedencegroup AutoLayoutCreationPrecedence {
+    associativity: left
+    higherThan: AutoLayoutPriorityPrecedence
+}
+infix operator ~ : AutoLayoutCreationPrecedence
+infix operator ! : AutoLayoutPriorityPrecedence
 
 public typealias AutoLayoutLeftItem = (item: AnyObject, attribute: NSLayoutAttribute)
 public typealias AutoLayoutRightItem = (item: AnyObject, attribute: NSLayoutAttribute, multiplier: CGFloat, constant: CGFloat)
@@ -60,75 +67,75 @@ public func +(lhs: View, rhs: EdgeInsets) -> (View, EdgeInsets) {
 // MARK: - Build expression
 
 public func ==(lhs: AutoLayoutLeftItem, rhs: AutoLayoutRightItem) -> () -> NSLayoutConstraint {
-    return build(lhs, rhs: rhs, relation: .Equal)
+    return build(lhs: lhs, rhs: rhs, relation: .equal)
 }
 
 public func <=(lhs: AutoLayoutLeftItem, rhs: AutoLayoutRightItem) -> () -> NSLayoutConstraint {
-    return build(lhs, rhs: rhs, relation: .LessThanOrEqual)
+    return build(lhs: lhs, rhs: rhs, relation: .lessThanOrEqual)
 }
 
 public func >=(lhs: AutoLayoutLeftItem, rhs: AutoLayoutRightItem) -> () -> NSLayoutConstraint {
-    return build(lhs, rhs: rhs, relation: .GreaterThanOrEqual)
+    return build(lhs: lhs, rhs: rhs, relation: .greaterThanOrEqual)
 }
 
 // MARK: - Constant
 
 public func ==(lhs: AutoLayoutLeftItem, rhs: CGFloat) -> () -> NSLayoutConstraint {
-    return build(lhs, constant: rhs, relation: .Equal)
+    return build(lhs: lhs, constant: rhs, relation: .equal)
 }
 
 public func <=(lhs: AutoLayoutLeftItem, rhs: CGFloat) -> () -> NSLayoutConstraint {
-    return build(lhs, constant: rhs, relation: .LessThanOrEqual)
+    return build(lhs: lhs, constant: rhs, relation: .lessThanOrEqual)
 }
 
 public func >=(lhs: AutoLayoutLeftItem, rhs: CGFloat) -> () -> NSLayoutConstraint {
-    return build(lhs, constant: rhs, relation: .GreaterThanOrEqual)
+    return build(lhs: lhs, constant: rhs, relation: .greaterThanOrEqual)
 }
 
 // MARK: - Size
 
 public func ==(lhs: View, rhs: CGSize) -> () -> [NSLayoutConstraint] {
-    return build(lhs, size: rhs, relation: .Equal)
+    return build(lhs: lhs, size: rhs, relation: .equal)
 }
 
 public func <=(lhs: View, rhs: CGSize) -> () -> [NSLayoutConstraint] {
-    return build(lhs, size: rhs, relation: .LessThanOrEqual)
+    return build(lhs: lhs, size: rhs, relation: .lessThanOrEqual)
 }
 
 public func >=(lhs: View, rhs: CGSize) -> () -> [NSLayoutConstraint] {
-    return build(lhs, size: rhs, relation: .GreaterThanOrEqual)
+    return build(lhs: lhs, size: rhs, relation: .greaterThanOrEqual)
 }
 
 
 // MARK: - Insets
 
 public func ==(lhs: View, rhs: (View, EdgeInsets)) -> () -> [NSLayoutConstraint] {
-    return build(lhs, rhs: rhs.0, insets: rhs.1, relations: (.Equal, .Equal, .Equal, .Equal))
+    return build(lhs, rhs: rhs.0, insets: rhs.1, relations: (.equal, .equal, .equal, .equal))
 }
 
 public func >=(lhs: View, rhs: (View, EdgeInsets)) -> () -> [NSLayoutConstraint] {
-    return build(lhs, rhs: rhs.0, insets: rhs.1, relations: (.LessThanOrEqual, .LessThanOrEqual, .GreaterThanOrEqual, .GreaterThanOrEqual))
+    return build(lhs, rhs: rhs.0, insets: rhs.1, relations: (.lessThanOrEqual, .lessThanOrEqual, .greaterThanOrEqual, .greaterThanOrEqual))
 }
 
 public func <=(lhs: View, rhs: (View, EdgeInsets)) -> () -> [NSLayoutConstraint] {
-    return build(lhs, rhs: rhs.0, insets: rhs.1, relations: (.GreaterThanOrEqual, .GreaterThanOrEqual, .LessThanOrEqual, .LessThanOrEqual))
+    return build(lhs, rhs: rhs.0, insets: rhs.1, relations: (.greaterThanOrEqual, .greaterThanOrEqual, .lessThanOrEqual, .lessThanOrEqual))
 }
 
 // MARK: - Alignment
 
 public func ==(lhs: (view1: View, view2: View), attribute: NSLayoutAttribute) -> () -> NSLayoutConstraint {
-    return build((lhs.view1, attribute), rhs: (lhs.view2, attribute, 1, 0), relation: .Equal)
+    return build(lhs: (lhs.view1, attribute), rhs: (lhs.view2, attribute, 1, 0), relation: .equal)
 }
 
 public func ==(lhs: (view1: View, view2: View), attributes: [NSLayoutAttribute]) -> () -> [NSLayoutConstraint] {
     return {
-        attributes.map { build((lhs.view1, $0), rhs: (lhs.view2, $0, 1, 0), relation: .Equal)() }
+        attributes.map { build(lhs: (lhs.view1, $0), rhs: (lhs.view2, $0, 1, 0), relation: .equal)() }
     }
 }
 
 // MARK: - Priority
 
-public func !(lhs: () -> NSLayoutConstraint, priority: LayoutPriority) -> () -> NSLayoutConstraint {
+public func !(lhs: @escaping () -> NSLayoutConstraint, priority: LayoutPriority) -> () -> NSLayoutConstraint {
     return {
         let c = lhs()
         c.priority = priority
@@ -136,7 +143,7 @@ public func !(lhs: () -> NSLayoutConstraint, priority: LayoutPriority) -> () -> 
     }
 }
 
-public func !(lhs: () -> [NSLayoutConstraint], priority: LayoutPriority) -> () -> [NSLayoutConstraint] {
+public func !(lhs: @escaping () -> [NSLayoutConstraint], priority: LayoutPriority) -> () -> [NSLayoutConstraint] {
     return {
         return lhs().map { c in
             c.priority = priority
@@ -155,63 +162,63 @@ public func <<=(lhs: View, rhs: () -> [NSLayoutConstraint]) {
     lhs.addConstraints(rhs())
 }
 
-public func activate(constraint: () -> NSLayoutConstraint) {
-    constraint().active = true
+public func activate(_ constraint: () -> NSLayoutConstraint) {
+    constraint().isActive = true
 }
 
-public func activate(constraints: () -> [NSLayoutConstraint]) {
-    NSLayoutConstraint.activateConstraints(constraints())
+public func activate(_ constraints: () -> [NSLayoutConstraint]) {
+    NSLayoutConstraint.activate(constraints())
 }
 
-public func deactivate(constraint: () -> NSLayoutConstraint) {
-    constraint().active = false
+public func deactivate(_ constraint: () -> NSLayoutConstraint) {
+    constraint().isActive = false
 }
 
-public func deactivate(constraints: () -> [NSLayoutConstraint]) {
-    NSLayoutConstraint.deactivateConstraints(constraints())
+public func deactivate(_ constraints: () -> [NSLayoutConstraint]) {
+    NSLayoutConstraint.deactivate(constraints())
 }
 
 // MARK: - private functions
 
-private func build(lhs: AutoLayoutLeftItem, rhs: AutoLayoutRightItem, relation: NSLayoutRelation) -> () -> NSLayoutConstraint {
+private func build(_ lhs: AutoLayoutLeftItem, rhs: AutoLayoutRightItem, relation: NSLayoutRelation) -> () -> NSLayoutConstraint {
     return {
         NSLayoutConstraint(item: lhs.item, attribute: lhs.attribute, relatedBy: relation, toItem: rhs.item, attribute: rhs.attribute, multiplier: rhs.multiplier, constant: rhs.constant)
     }
 }
 
-private func build(lhs: AutoLayoutLeftItem, constant: CGFloat, relation: NSLayoutRelation) -> () -> NSLayoutConstraint {
+private func build(_ lhs: AutoLayoutLeftItem, constant: CGFloat, relation: NSLayoutRelation) -> () -> NSLayoutConstraint {
     return {
-        NSLayoutConstraint(item: lhs.item, attribute: lhs.attribute, relatedBy: relation, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: constant)
+        NSLayoutConstraint(item: lhs.item, attribute: lhs.attribute, relatedBy: relation, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: constant)
     }
 }
 
-private func build(lhs: View, size: CGSize, relation: NSLayoutRelation) -> () -> [NSLayoutConstraint] {
+private func build(_ lhs: View, size: CGSize, relation: NSLayoutRelation) -> () -> [NSLayoutConstraint] {
     return {
         var cons: [NSLayoutConstraint] = []
         if size.width.isFinite {
-            cons.append(build(lhs ~ .Width, constant: size.width, relation: relation)())
+            cons.append(build(lhs: lhs ~ .width, constant: size.width, relation: relation)())
         }
         if size.height.isFinite {
-            cons.append(build(lhs ~ .Height, constant: size.height, relation: relation)())
+            cons.append(build(lhs: lhs ~ .height, constant: size.height, relation: relation)())
         }
         return cons
     }
 }
 
-private func build(lhs: View, rhs: View, insets: EdgeInsets, relations: (top: NSLayoutRelation, left: NSLayoutRelation, bottom: NSLayoutRelation, right: NSLayoutRelation)) -> () -> [NSLayoutConstraint] {
+private func build(_ lhs: View, rhs: View, insets: EdgeInsets, relations: (top: NSLayoutRelation, left: NSLayoutRelation, bottom: NSLayoutRelation, right: NSLayoutRelation)) -> () -> [NSLayoutConstraint] {
     return {
         var cons: [NSLayoutConstraint] = []
         if insets.top.isFinite {
-            cons.append(build(lhs ~ .Top, rhs: rhs ~ .Top - insets.top, relation: relations.top)())
+            cons.append(build(lhs: lhs ~ .top, rhs: rhs ~ .top - insets.top, relation: relations.top)())
         }
         if insets.left.isFinite {
-            cons.append(build(lhs ~ .Left, rhs: rhs ~ .Left - insets.left, relation: relations.left)())
+            cons.append(build(lhs: lhs ~ .left, rhs: rhs ~ .left - insets.left, relation: relations.left)())
         }
         if insets.bottom.isFinite {
-            cons.append(build(lhs ~ .Bottom, rhs: rhs ~ .Bottom + insets.bottom, relation: relations.bottom)())
+            cons.append(build(lhs: lhs ~ .bottom, rhs: rhs ~ .bottom + insets.bottom, relation: relations.bottom)())
         }
         if insets.right.isFinite {
-            cons.append(build(lhs ~ .Right, rhs: rhs ~ .Right + insets.right, relation: relations.right)())
+            cons.append(build(lhs: lhs ~ .right, rhs: rhs ~ .right + insets.right, relation: relations.right)())
         }
         return cons
     }
